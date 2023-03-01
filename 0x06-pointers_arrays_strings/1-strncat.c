@@ -3,9 +3,9 @@
 /**
  * _strncat - concatenates two strings
  * using at most n bytes from src
- * @dest - the value of input
- * @src - the value of input
- * @n - the value of input
+ * @dest: input value
+ * @src: input value
+ * @n: input value
  * Return: dest
  */
 
