@@ -1,14 +1,17 @@
 #include "main"
 /**
  * _strlen_recursion - function that prints the legnth of strings
- * @s: string length
- * Return: length
+ * @s: string
+ * Return: length of string
  */
 int _strlen_recursion(char *s);
 {
-	if (*s == '\0')
+	int n = 0;
+
+	if (*s)
 	{
-		return;
+		n++;
+		n += _strlen_recursion(s + 1);
 	}
-	return (1 + length(s, *s + 1));
+	return (n);
 }
