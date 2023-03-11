@@ -1,53 +1,52 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 /**
- * make_change - finds least number of coins
- * @n: money amount
- * Return: number of coins
+ * main - prints the min number of coins to make change
+ * for an amount of money
+ * @argc: argument count
+ * @argv: arguments
+ * Return: 0
  */
 
-int make_change(int n)
+int main(int argc, char **argv)
 {
-	int coins, quarters, dimes, nickels, twocents, pennies;
+	int t, c;
+	unsigned int m;
+	char *p;
+	int cents[] = {25, 10, 5, 2};
 
-	coins = 0;
-	quarters = 0;
-	dimes = 0;
-	nickels = 0;
-	twocents = 0;
-	pennies = 0;
-
-	while (n > 0)
+	if (argc != 2)
 	{
-		if (n >= 25)
-		{
-			n -= 25;
-			quarters += 1;
-		}
-		else if (n >= 10)
-		{
-			n -= 10;
-			dimes += 1;
-		}
-		else if (n >= 5)
-		{
-			n -= 5;
-			nickels += 1;
-		}
-		else if (n >= 2)
-		{
-			n -= 2;
-			twocents += 1;
-		}
-		else
-		{
-			n -= 1;
-			pennies += 1;
-		}
+		printf("Error\n");
+		return (1);
 	}
-	coins = quarters + dimes + nickels + twocents + pennies;
 
-	return (coins);
+	t = strtol(argv[1], &p, 10);
+	c = 0;
+
+	if (!*p)
+	{
+		while (t > 1)
+		{
+			for (m = 0; m < sizeof(cents[m]); m++)
+			{
+				if (t >= cents[m])
+				{
+					c += t / cents[m];
+					t = t % cents[m];
+				}
+			}
+		}
+		if (t == 1)
+			c++;
+	}
+	else
+	{
+		printf("Error\n");
+		return (1);
+	}
+
+	printf("%d\n", c);
+	return (0);
 }
