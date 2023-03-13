@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "holberton.h"
+#include "main.h"
 /**
  * create_array - check the code for Holberton School students.
  * @size: argument for size of the array
