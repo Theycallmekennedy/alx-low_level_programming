@@ -6,10 +6,9 @@
  * Return: A pointer to the string and returns NULL if string is NULL
  */
 char *_strdup(char *str)
-{
+	{
 	char *new_str, *start;
-	int i = 0;
-	size_t len = 0;
+	int i = 0, len = 0;
 
 	if (str == NULL)
 		return (NULL);
@@ -21,6 +20,7 @@ char *_strdup(char *str)
 		len++;
 		str++;
 	}
+
 	str = start;
 	new_str = malloc(sizeof(char) * (len + 1));
 	start = new_str;
@@ -36,7 +36,5 @@ char *_strdup(char *str)
 		return (start);
 	}
 	else
-	{
 		return (NULL);
-	}
 }
