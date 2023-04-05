@@ -1,51 +1,61 @@
 #include "lists.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
- * print_listint_safe - function that prints a listint_t linked list
+ * _r - reallocates memory for an array of pointers
+ * to the nodes in a linked list
+ * @list: the old list to append
+ * @size: size of the new list (always one more than the old list)
+ * @new: new node to add to the list
  *
- * @head: a pointer to the first node of the list
+ * Return: pointer to the new list
+ */
+const listint_t **_r(const listint_t **list, size_t size, const listint_t *new)
+{
+	const listint_t **current;
+	size_t i;
+
+	newlist = malloc(size * sizeof(listint_t *));
+	if (current == NULL)
+	{
+		free(list);
+		exit(98);
+	}
+	for (i = 0; i < size - 1; i++)
+		newlist[i] = list[i];
+	current[i] = new;
+	free(list);
+	return (newlist);
+}
+
+/**
+ * print_listint_safe - this prints a listint_t linked list.
+ * @head: a pointer to the start of the list
  *
- * Return: Number of nodes in the list
+ * Return: the number of nodes in the list
  */
 size_t print_listint_safe(const listint_t *head)
 {
-	size_t count = 0;
-	const listint_t *slow_ptr = head, *fast_ptr = head;
+	size_t i, num = 0;
+	const listint_t **temp = NULL;
 
-	while (slow_ptr && fast_ptr && fast_ptr->next)
+	while (head != NULL)
 	{
-		printf("[%p] %d\n", (void *) slow_ptr, slow_ptr->n);
-		count++;
-
-		slow_ptr = slow_ptr->next;
-		fast_ptr = fast_ptr->next->next;
-
-		if (slow_ptr == fast_ptr)
+		for (i = 0; i < num; i++)
 		{
-			slow_ptr = head;
-			while (slow_ptr != fast_ptr)
+			if (head == temp[i])
 			{
-				printf("[%p] %d\n", (void *) slow_ptr, slow_ptr->n);
-				count++;
-				slow_ptr = slow_ptr->next;
-				fast_ptr = fast_ptr->next;
+				printf("-> [%p] %d\n", (void *)head, head->n);
+				free(temp);
+				return (num);
 			}
-			printf("[%p] %d\n", (void *) slow_ptr, slow_ptr->n);
-			count++;
-			break;
 		}
+		num++;
+		temp = _r(temp, num, head);
+		printf("[%p] %d\n", (void *)head, head->n);
+		head = head->next;
 	}
-
-	if (!slow_ptr || !fast_ptr)
-	{
-		while (head)
-		{
-			printf("[%p] %d\n", (void *) head, head->n);
-			count++;
-			head = head->next;
-		}
-	}
-	return (count);
+	free(temp);
+	return (num);
 }
