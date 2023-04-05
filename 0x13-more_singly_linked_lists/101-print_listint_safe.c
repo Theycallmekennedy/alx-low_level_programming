@@ -16,17 +16,17 @@ const listint_t **_r(const listint_t **list, size_t size, const listint_t *new)
 	const listint_t **current;
 	size_t i;
 
-	newlist = malloc(size * sizeof(listint_t *));
+	current = malloc(size * sizeof(listint_t *));
 	if (current == NULL)
 	{
 		free(list);
 		exit(98);
 	}
 	for (i = 0; i < size - 1; i++)
-		newlist[i] = list[i];
+		current[i] = list[i];
 	current[i] = new;
 	free(list);
-	return (newlist);
+	return (current);
 }
 
 /**
