@@ -1,7 +1,7 @@
 #include "lists.h"
 #include <stdlib.h>
 /**
- * delete_nodeint_at_index - this function deletes node at index index of listint_t
+ * delete_nodeint_at_index - this function deletes node at index of listint_t
  *
  * @head: pointer to pointer to head of list
  *
